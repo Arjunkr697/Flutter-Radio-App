@@ -17,7 +17,7 @@ flutter run
 
 |   Station List    |        Player          |
 |----------------|-------------------------------|
-| ![screenshot-1678268358065](https://user-images.githubusercontent.com/14290499/223677714-9eef569d-f853-4316-a928-a0a88ec6afb2.png) | ![screenshot-1678268349613](https://user-images.githubusercontent.com/14290499/223677788-9f02387c-b253-4e59-96ca-5417a65a52db.png)  |
+| ![screenshot-1678268358065](https://firebasestorage.googleapis.com/v0/b/draroo-590f6.appspot.com/o/Screenshot_2024-09-24-10-58-47-45_7ae9e622691a5bd6d3624a2d5f45f76a.jpg?alt=media&token=282c6448-a6c2-4890-b46d-fe205325a344) | ![screenshot-1678268349613](https://firebasestorage.googleapis.com/v0/b/draroo-590f6.appspot.com/o/Screenshot_2024-09-24-10-59-04-81_7ae9e622691a5bd6d3624a2d5f45f76a.jpg?alt=media&token=5bb9320b-fae7-4a10-855e-3cb6f2abf516)  |
 
 
 
