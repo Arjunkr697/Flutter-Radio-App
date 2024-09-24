@@ -33,7 +33,7 @@ class _RadioListState extends State<RadioList> {
   void initState() {
     super.initState();
     _controller.addListener(moveOffset);
-    radioClass =  RadioClass();
+    radioClass = RadioClass();
     readJson();
   }
 
@@ -50,7 +50,8 @@ class _RadioListState extends State<RadioList> {
   }
 
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/json/station.json');
+    final String response =
+        await rootBundle.loadString('assets/json/station.json');
     List<dynamic> data = json.decode(response);
 
     setState(() {
@@ -86,15 +87,12 @@ class _RadioListState extends State<RadioList> {
 
       stationList.asMap().forEach((index, items) {
         if (items == item) {
-          if(item['isPlay'] == true) {
+          if (item['isPlay'] == true) {
             stationList[index]['isPlay'] = false;
             radioClass.pause();
           } else {
             stationList[index]['isPlay'] = true;
-            Future.delayed(
-              const Duration(seconds: 1),
-              () => radioClass.play(),
-            );
+            Future.delayed(const Duration(seconds: 1), () => radioClass.play());
           }
         } else {
           stationList[index]['isPlay'] = false;
@@ -116,15 +114,12 @@ class _RadioListState extends State<RadioList> {
   void checkStation() {
     stationList.asMap().forEach((index, items) {
       if (items == currentlyPlaying) {
-        if(currentlyPlaying['isPlay'] == true) {
+        if (currentlyPlaying['isPlay'] == true) {
           stationList[index]['isPlay'] = false;
           radioClass.pause();
         } else {
           stationList[index]['isPlay'] = true;
-          Future.delayed(
-            const Duration(seconds: 1),
-            () => radioClass.play(),
-          );
+          Future.delayed(const Duration(seconds: 1), () => radioClass.play());
         }
       } else {
         stationList[index]['isPlay'] = false;
@@ -152,44 +147,57 @@ class _RadioListState extends State<RadioList> {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16),
-                child: Text('Recently played', style: theme.textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w600, color: Colors.white)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16),
+                child: Text(
+                  'Recently Played',
+                  style: theme.textTheme.headlineSmall!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
-            SliverList(
+            SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Number of columns
+                childAspectRatio: 0.75, // Aspect ratio for items
+                crossAxisSpacing: 8.0, // Spacing between columns
+                mainAxisSpacing: 8.0, // Spacing between rows
+              ),
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   final item = stationList[index];
-
                   return RadioCard(
                     onTab: () => radioPlayer(item),
-                    item: item
+                    item: item,
                   );
                 },
                 childCount: stationList.length,
               ),
             ),
             const SliverToBoxAdapter(
-              child: SizedBox(
-                height: 70,
-              ),
+              child: SizedBox(height: 70),
             ),
           ],
         ),
         onIsContractedCallback: () => print('contracted'),
         onIsExtendedCallback: () => print('extended'),
         persistentContentHeight: 64,
-        expandableContent: isPlayCardVisible ? Player(
-          title: radioTitle,
-          listener: radioListener,
-          imageURL: radioImageURl,
-          percentageOpen: _percentageOpen,
-          onTab: () => isPlaying ? pause() : play(),
-          icon: isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-          metadata: metadata,
-        ) : const SizedBox(),
+        expandableContent: isPlayCardVisible
+            ? Player(
+                title: radioTitle,
+                listener: radioListener,
+                imageURL: radioImageURl,
+                percentageOpen: _percentageOpen,
+                onTab: () => isPlaying ? pause() : play(),
+                icon:
+                    isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                metadata: metadata,
+              )
+            : const SizedBox(),
         onOffsetChanged: (offset, minOffset, maxOffset) {
-          if(isPlayCardVisible) {
+          if (isPlayCardVisible) {
             if (maxOffset == null || offset == null || minOffset == null) {
               return;
             }
